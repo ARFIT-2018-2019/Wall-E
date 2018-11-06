@@ -4,7 +4,7 @@
 
 #include "../includes/Sensors.h"
 
-Sensors::Sensors(){ 
+Sensors::Sensors(){  
 }
 
 Sensors::Sensors(SerialCom* serialCom) {
