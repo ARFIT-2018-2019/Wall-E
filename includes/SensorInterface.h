@@ -8,7 +8,7 @@
 class SensorInterface {
     public:
         // pure virtual function providing interface framework.
-        virtual bool check() = 0;
+        virtual int getValue() = 0;
 };
 
 

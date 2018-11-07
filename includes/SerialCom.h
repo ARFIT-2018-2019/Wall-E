@@ -6,9 +6,6 @@
 #define PROJECT_SERIAL_COM_H
 
 #include <Arduino.h>
-#include <string>
-
-using namespace std;
 
 class SerialCom {
 
@@ -23,13 +20,15 @@ class SerialCom {
         void setDebugMode(bool debugMode);
         void setSpeed(int speed);
 
-        void sendMessage(string key, string message);
+        void init();
+        void sendMessage(String key, String message);
 
     private:
         bool debugMode;
         int speed;
         bool hasBeenInitialized = false;
-        void write(string message);
+        void write(String message);
+        void initMessage();
 };
 
 #endif //PROJECT_SERIAL_COM_H
