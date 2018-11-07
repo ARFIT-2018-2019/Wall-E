@@ -7,21 +7,24 @@
 #define DISTANCE_MIN_COLLISION 600
 
 #include <Arduino.h>
+#include "SerialCom.h"
 #include "SensorInterface.h"
 #include "EnumDirection.h"
 
 class SensorCollision : public SensorInterface {
 
 public:
-    SensorCollision();
-    SensorCollision(int pin, Direction direction);
+    SensorCollision(int pin, Direction::_enumType direction, SerialCom* serialCom);
 
     //get-set
     int getPin();
-    Direction  getDirection();
+    Direction getDirection();
+    SerialCom* getSerialCom();
 
     void setPin(int pin);
-    void setDirection(Direction direction);
+    void setDirection(Direction::_enumType direction);
+    void setSerialCom(SerialCom* serialCom);
+
 
     int getValue();
     void init();
@@ -29,6 +32,7 @@ public:
 private:
     int pin;
     Direction direction;
+    SerialCom* serialCom;
 };
 
 

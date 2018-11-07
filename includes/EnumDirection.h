@@ -4,34 +4,55 @@
 
 #ifndef WALL_E_ENUM_DIRECTION_H
 #define WALL_E_ENUM_DIRECTION_H
-#include <map>
+#include "Arduino.h"
 
-enum class Direction {
-    TopRight,
-    Top,
-    TopLeft,
-    Left,
-    BotLeft,
-    Bot,
-    BotRight,
-    Right
+class Direction  {
+public:
+    enum _enumType {
+        TopRight,
+        Top,
+        TopLeft,
+        Left,
+        BotLeft,
+        Bot,
+        BotRight,
+        Right
+    };
+
+    Direction() {}
+    Direction(_enumType value) : m_value(value) { }
+    // For switch to work
+    operator _enumType () const {
+        return (int)m_value;
+    }
+    // This operator provides conversion to int
+    explicit operator int() const {
+        return (int)m_value;
+    }
+    String toString() const {
+        switch(m_value) {
+            case TopRight:
+                return String("TopRight");
+            case Top:
+                return String("Top");
+            case TopLeft:
+                return String("TopLeft");
+            case Left:
+                return String("Left");
+            case BotLeft:
+                return String("BotLeft");
+            case Bot:
+                return String("Bot");
+            case BotRight:
+                return String("BotRight");
+            case Right:
+                return String("Right");
+            default:
+                return "";
+        }
+    }
+
+private:
+    _enumType m_value;
 };
-
-String toString(Direction direction){
-
-    typedef std::map<Direction, String> MapStringDirection;
-    typedef std::pair<Direction, String> StringDirection;
-    MapStringDirection listDirectionConvert;
-
-    listDirectionConvert.insert(StringDirection(Direction::TopRight, String("TopRight")));
-    listDirectionConvert.insert(StringDirection(Direction::Top, String("Top")));
-    listDirectionConvert.insert(StringDirection(Direction::TopLeft, String("TopLeft")));
-    listDirectionConvert.insert(StringDirection(Direction::Left, String("Left")));
-    listDirectionConvert.insert(StringDirection(Direction::BotLeft, String("BotLeft")));
-    listDirectionConvert.insert(StringDirection(Direction::Bot, String("Bot")));
-    listDirectionConvert.insert(StringDirection(Direction::BotRight, String("BotRight")));
-    listDirectionConvert.insert(StringDirection(Direction::Right, String("Right")));
-
-    return listDirectionConvert[direction];
-}
 #endif //WALL_E_ENUMDIRECTION_H

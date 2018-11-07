@@ -4,6 +4,9 @@
 
 #include "../includes/SerialCom.h"
 
+//==================================================
+//================== CONSTRUCTORS ==================
+//==================================================
 
 SerialCom::SerialCom(){
     this->debugMode = true; //default value true;
@@ -14,6 +17,10 @@ SerialCom::SerialCom(bool debugMode, int speed){
     this->debugMode = debugMode;
     this->speed = speed;
 }
+
+//==================================================
+//================= GETTER - SETTER ================
+//==================================================
 
 int SerialCom::getSpeed(){
     return this->speed;
@@ -30,6 +37,10 @@ void SerialCom::setDebugMode(bool debugMode){
 void SerialCom::setSpeed(int speed){
     this->speed = speed;
 }
+
+//==================================================
+//===================== METIER =====================
+//==================================================
 
 void SerialCom::sendMessage(String key, String message){
     String toSend = key + " : " + message;
