@@ -51,12 +51,12 @@ void SerialCom::sendMessage(String key, String message){
 }
 
 void SerialCom::write(String message){
-    Serial.write(message.c_str());
+    Serial.write(String(message +"\n").c_str());
 }
 
 void SerialCom::initMessage(){
     String debugModeStr = String(debugMode);
-    String initMessage  = String("Serial has been init (mode dev : " + debugModeStr + ")\n");
+    String initMessage  = String("Serial has been init (mode dev : " + debugModeStr + ")");
 
     this->sendMessage("Serial init",initMessage);
 }

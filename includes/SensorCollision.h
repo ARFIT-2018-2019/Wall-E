@@ -14,6 +14,7 @@
 class SensorCollision : public SensorInterface {
 
 public:
+    SensorCollision();
     SensorCollision(int pin, Direction::_enumType direction, SerialCom* serialCom);
 
     //get-set
