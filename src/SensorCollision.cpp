@@ -61,5 +61,3 @@ int SensorCollision::getValue() {
         return 0;
     }*/
 }
-
-
