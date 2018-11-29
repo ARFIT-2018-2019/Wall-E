@@ -10,21 +10,24 @@
 #include "../SerialCom.h"
 #include <SoftwareSerial.h>
 #include <RoboClaw.h>
-#include "EnumMotor.h"
+#include "EnumEnumMotorName.h"
+#include "Positionnement/Position.h"
 
 class MotorController {
 
     public:
         MotorController();
-        MotorController(MotorName::_enumType motorName, RoboClaw* roboClaw);
+        MotorController(EnumMotorName::_enumType EnumMotorName, RoboClaw* roboClaw);
 
         void init();
         void avancer(int pwm);
         void reculer(int pwm);
+        void allerA(int x, int y);
+        void TournerDe(float deg);
 
     private:
         RoboClaw* roboClaw;
-        MotorName motorName;
+        EnumMotorName EnumMotorName;
 };
 
 

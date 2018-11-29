@@ -6,15 +6,15 @@
 #define WALL_E_ENUM_MOTOR_H
 #include "Arduino.h"
 
-class MotorName {
+class EnumMotorName {
     public:
         enum _enumType {
             MOTOR_DROITE,
             MOTOR_GAUCHE // 2
         };
 
-        MotorName() {}
-        MotorName(_enumType value) : m_value(value) { }
+        EnumMotorName() {}
+        EnumMotorName(_enumType value) : m_value(value) { }
         // For switch to work
         operator _enumType () const {
             return (int)m_value;

@@ -27,7 +27,7 @@ std::map<Direction, SensorCollision*> mapSensorCollision
 
 // todo change function Motor design Code
 
-//MotorController motor = MotorController(MotorName::MOTOR_DROITE, &roboclaw);
+//MotorController motor = MotorController(EnumMotorName::MOTOR_DROITE, &roboclaw);
 
 void setup() {
     serialCom.init();

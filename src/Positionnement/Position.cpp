@@ -6,8 +6,10 @@
 //==================================================
 //================== CONSTRUCTORS ==================
 //==================================================
-Position::Position(){
-
+Position::Position(float posDepartX, float posDepartY, float angleDepart){
+    this->x = posDepartX;
+    this->y = posDepartY;
+    this->angle = angleDepart;
 }
 //==================================================
 //===================== METIER =====================
@@ -19,11 +21,16 @@ void Position::init(){
 
 int Position::getPosX(){
     //TODO
-    return 0;
+    return this->x;
 }
 
 int Position::getPosxY){
     //TODO
-    return 0;
+    return this->y;
+}
+
+int Position::getRot() {
+    //TODO
+    return this->angle;
 }
 

@@ -4,6 +4,9 @@
 #include "../includes/WallE.h"
 #define PIN_SS1 10
 #define PIN_SS2 11
+#define X_DEPART 50
+#define Y_DEPART 60
+#define ANGLE_DEPART 90
 
 
 WallE::WallE() {
@@ -12,8 +15,10 @@ WallE::WallE() {
 
     this->softwareSerial = SoftwareSerial(PIN_SS1, PIN_SS2);
     this->robotClaw = RoboClaw(this->softwareSerial, 10000);
-    this->motorController = MotorController(MotorName::MOTOR_DROITE, robotClaw);
-    this->motorController = MotorController(MotorName::MOTOR_GAUCHE, robotClaw);
+    this->motorController = MotorController(EnumMotorName::MOTOR_DROITE, robotClaw);
+    this->motorController = MotorController(EnumMotorName::MOTOR_GAUCHE, robotClaw);
+
+    this->position = Position(X_DEPART, Y_DEPART, ANGLE_DEPART);
 };
 
 

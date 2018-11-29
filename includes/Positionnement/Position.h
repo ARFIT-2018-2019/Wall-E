@@ -15,13 +15,18 @@ class Position {
 
 public:
     Position();
+    Position(float posDepartX, float posDepartY);
 
     void init();
 
-    int getPosX();
-    int getPosY();
+    float getPosX();
+    float getPosY();
+    float getRot();
 
 private:
+    float x;
+    float y;
+    float angle;
 
 };
 
