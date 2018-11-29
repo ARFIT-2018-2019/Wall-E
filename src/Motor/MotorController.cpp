@@ -23,3 +23,4 @@ void MotorController::avancer(int pwm){
   this->roboClaw->ForwardM1(0x80,pwm); //start Motor1 forward at half speed
   this->roboClaw->BackwardM2(0x80,pwm); //start Motor2 backward at half speed
 }
+
