@@ -11,20 +11,16 @@ class SerialCom {
 
     public:
         SerialCom();
-        SerialCom(bool debugMode, int speed);
+        SerialCom(int speed);
 
         //get-set
         int getSpeed();
-        bool isDebugMode();
-
-        void setDebugMode(bool debugMode);
         void setSpeed(int speed);
 
         void init();
         void sendMessage(String key, String message);
 
     private:
-        bool debugMode;
         int speed;
         bool hasBeenInitialized = false;
         void write(String message);

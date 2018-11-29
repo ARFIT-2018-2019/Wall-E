@@ -4,37 +4,17 @@
 
 #include "../includes/SerialCom.h"
 
+#define DEFAULT_SPEED 9600
+#define DEFAULT_KEY_SERIAL "Serial"
 //==================================================
 //================== CONSTRUCTORS ==================
 //==================================================
 
 SerialCom::SerialCom(){
-    this->debugMode = true; //default value true;
-    this->speed = 9600; //default value 9600
+    this->speed = DEFAULT_SPEED; //default value 9600
 }
 
-SerialCom::SerialCom(bool debugMode, int speed){
-    this->debugMode = debugMode;
-    this->speed = speed;
-}
-
-//==================================================
-//================= GETTER - SETTER ================
-//==================================================
-
-int SerialCom::getSpeed(){
-    return this->speed;
-}
-
-bool SerialCom::isDebugMode(){
-    return this->debugMode;
-}
-
-void SerialCom::setDebugMode(bool debugMode){
-    this->debugMode = debugMode;
-}
-
-void SerialCom::setSpeed(int speed){
+SerialCom::SerialCom(int speed){
     this->speed = speed;
 }
 
@@ -43,10 +23,7 @@ void SerialCom::setSpeed(int speed){
 //==================================================
 
 void SerialCom::sendMessage(String key, String message){
-    String toSend = key + " : " + message;
-    if(this->debugMode)
-        toSend = " [debug] " + toSend;
-
+    String toSend = key + ":" + message;
     this->write(toSend);
 }
 
@@ -55,10 +32,8 @@ void SerialCom::write(String message){
 }
 
 void SerialCom::initMessage(){
-    String debugModeStr = String(debugMode);
-    String initMessage  = String("Serial has been init (mode dev : " + debugModeStr + ")");
-
-    this->sendMessage("Serial init",initMessage);
+    String initMessage  = String("Serial has been init");
+    this->sendMessage(DEFAULT_KEY_SERIAL,initMessage);
 }
 
 void SerialCom::init(){
@@ -70,4 +45,16 @@ void SerialCom::init(){
 
     this->initMessage();
     this->hasBeenInitialized = true;
+}
+
+//==================================================
+//================= GETTER - SETTER ================
+//==================================================
+
+int SerialCom::getSpeed(){
+    return this->speed;
+}
+
+void SerialCom::setSpeed(int speed){
+    this->speed = speed;
 }
