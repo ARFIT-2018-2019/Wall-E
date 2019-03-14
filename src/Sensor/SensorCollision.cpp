@@ -4,15 +4,16 @@
 
 #include "../../includes/Sensor/SensorCollision.h"
 #include <map>
+#include "../../includes/Motor/MotorController.h"
 
-#define DEFAULT_KEY_SENSOR_COLLISION
 //==================================================
 //================== CONSTRUCTORS ==================
 //==================================================
 SensorCollision::SensorCollision(){}
-SensorCollision::SensorCollision(int pin, Direction::_enumType direction) {
+SensorCollision::SensorCollision(int pin, DirectionEnum directionEnum) {
     this->pin = pin;
-    this->direction = Direction(direction);
+    this->direction = Direction(directionEnum);
+    this->value = -1;
 }
 
 //==================================================
@@ -21,10 +22,13 @@ SensorCollision::SensorCollision(int pin, Direction::_enumType direction) {
 
 void SensorCollision::init() {
     pinMode(pin, INPUT);
-    wallE::serialCom->sendMessage(DEFAULT_KEY_SENSOR_COLLISION, "SensorCollision " + this->direction.toString() + " on " + String(pin));
+    /*Serial.print("SensorCollision ");
+    Serial.print(this->direction.toString());
+    Serial.print(" on ");
+    Serial.println(String(pin));*/
 }
 int SensorCollision::getValue() {
-    return analogRead(this->pin);
+    return this->value;
 /*    if (analogRead(this->pin) > DISTANCE_MIN_COLLISION) {
         return 1;
     } else {
@@ -39,16 +43,26 @@ int SensorCollision::getValue() {
 Direction SensorCollision::getDirection() {
     return this->direction;
 }
-void SensorCollision::setDirection(Direction::_enumType direction) {
-    this->direction = Direction(direction);
+void SensorCollision::setDirection(DirectionEnum directionEnum) {
+    this->direction = Direction(directionEnum);
 }
 int SensorCollision::getPin() {
-    return this->getPin();
+    return this->pin;
 }
 void SensorCollision::setPin(int pin) {
     this->pin = pin;
 }
 
-SensorCollisionPair getSensorMappable(){
-    return SensorCollisionPair(this->direction, this);
+int SensorCollision::readValue() {
+    return analogRead(this->pin);
+}
+
+void SensorCollision::run(){
+    int valueNoSafe = this->readValue();
+    int volt = map(valueNoSafe, 0, 1023, 0, 5000);
+    int valueCm = (21.16/(volt-0.1696))*1000;
+    value = valueCm;
+    if(value <= 5)
+        MotorController::stop();
+    runned();
 }

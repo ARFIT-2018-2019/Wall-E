@@ -7,30 +7,31 @@
 #define DISTANCE_MIN_COLLISION 600
 
 #include <Arduino.h>
-#include "SensorInterface.h"
+#include "Thread.h"
+#include <DueTimer.h>
 #include "../EnumDirection.h"
-#include <map>
-typedef std::pair<Direction, SensorInterface*> SensorCollisionPair;
 
-class SensorCollision : public SensorInterface {
+class SensorCollision : public Thread {
     public:
         SensorCollision();
-        SensorCollision(int pin, Direction::_enumType direction);
+        SensorCollision(int pin, DirectionEnum directionEnum);
 
         //get-set
         int getPin();
         Direction getDirection();
 
         void setPin(int pin);
-        void setDirection(Direction::_enumType direction);
+        void setDirection(DirectionEnum directionEnum);
 
         int getValue();
+        int readValue();
         void init();
-        SensorCollisionPair getSensorMappable();
 
+        void run();
     private:
         int pin;
         Direction direction;
+        int value;
 };
 
 
